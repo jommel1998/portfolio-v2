@@ -3,15 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Jommel Hinayon - Full Stack Developer</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
+    <title>Jommel Hinayon — Full Stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
       tailwind.config = {
@@ -19,1022 +14,1126 @@
         theme: {
           extend: {
             colors: {
-              primary: "#096cdc", // Matches your preference for professional blue
-              "background-light": "#f5f7f8",
-              "background-dark": "#0d1117",
-              "card-dark": "#161b22",
-              "border-dark": "#30363d",
-              "text-secondary": "#8b949e",
-              success: "#238636",
+              primary: "#3b82f6",
+              "bg-dark": "#080c10",
+              "surface": "#0d1117",
+              "card": "#111827",
+              "border": "#1f2937",
+              "muted": "#6b7280",
+              "accent": "#10b981",
             },
             fontFamily: {
               display: ["Space Grotesk", "sans-serif"],
-              mono: [
-                "ui-monospace",
-                "SFMono-Regular",
-                "SF Mono",
-                "Menlo",
-                "Consolas",
-                "Liberation Mono",
-                "monospace",
-              ],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
-            animation: {
-              blob: "blob 7s infinite",
-              "float-code": "float-code 20s linear infinite",
-              "grid-move": "grid-move 3s linear infinite", // Added grid animation
-            },
-            keyframes: {
-              blob: {
-                "0%": { transform: "translate(0px, 0px) scale(1)" },
-                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
-                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
-                "100%": { transform: "translate(0px, 0px) scale(1)" },
-              },
-              "float-code": {
-                "0%": {
-                  transform: "translateY(100vh) rotate(0deg)",
-                  opacity: "0",
-                },
-                "10%": { opacity: "1" },
-                "90%": { opacity: "1" },
-                "100%": {
-                  transform: "translateY(-100px) rotate(20deg)",
-                  opacity: "0",
-                },
-              },
-              "grid-move": {
-                "0%": { backgroundPosition: "0 0" },
-                "100%": { backgroundPosition: "40px 40px" },
-              },
+              mono: ["JetBrains Mono", "monospace"],
             },
           },
         },
       };
     </script>
     <style>
-      /* Custom scrollbar to match the theme */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0d1117;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #30363d;
-        border-radius: 5px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #8b949e;
+      * { box-sizing: border-box; }
+
+      :root {
+        --primary: #3b82f6;
+        --accent: #10b981;
+        --bg: #080c10;
+        --surface: #0d1117;
+        --card: #111827;
+        --border: #1f2937;
+        --muted: #6b7280;
+        --text: #f3f4f6;
       }
 
-      /* Terminal typing effect cursor */
-      .typing-cursor::after {
-        content: "▋";
-        animation: blink 1s step-start infinite;
-        color: #58a6ff;
-      }
-      @keyframes blink {
-        50% {
-          opacity: 0;
-        }
+      html { scroll-behavior: smooth; }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Space Grotesk', sans-serif;
+        overflow-x: hidden;
       }
 
-      /* Animation utilities */
-      .fade-in-up {
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.6s ease-out forwards;
-      }
-      .fade-in-left {
-        opacity: 0;
-        transform: translateX(-20px);
-        animation: fadeInLeft 0.6s ease-out forwards;
-      }
-      .fade-in-right {
-        opacity: 0;
-        transform: translateX(20px);
-        animation: fadeInRight 0.6s ease-out forwards;
+      /* Scrollbar */
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: var(--bg); }
+      ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+      /* ─── NOISE OVERLAY ─── */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.4;
       }
 
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes fadeInLeft {
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      @keyframes fadeInRight {
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
+      /* ─── NAV ─── */
+      nav {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 50;
+        border-bottom: 1px solid var(--border);
+        background: rgba(8, 12, 16, 0.8);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
       }
 
-      /* Staggered delays */
-      .delay-100 {
-        animation-delay: 100ms;
-      }
-      .delay-200 {
-        animation-delay: 200ms;
-      }
-      .delay-300 {
-        animation-delay: 300ms;
-      }
-      .delay-400 {
-        animation-delay: 400ms;
-      }
-      .delay-500 {
-        animation-delay: 500ms;
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
       }
 
-      /* Custom Animation Delays for Blobs */
-      .animation-delay-2000 {
-        animation-delay: 2s;
-      }
-      .animation-delay-4000 {
-        animation-delay: 4s;
+      .nav-logo {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
-      .timeline-line::before {
-        content: "";
+      .nav-logo .dot { color: var(--accent); }
+
+      .nav-links { display: flex; align-items: center; gap: 2rem; }
+      .nav-links a {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+        letter-spacing: 0.02em;
+      }
+      .nav-links a:hover { color: var(--text); }
+
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .nav-github-btn { display: none !important; }
+        .nav-hire-btn { display: none !important; }
+        .mobile-menu-btn { display: flex !important; }
+      }
+
+      .btn-outline {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 0.4rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        text-decoration: none;
+        transition: all 0.2s;
+        background: transparent;
+      }
+      .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+      .btn-primary {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 0.4rem 1rem;
+        border-radius: 6px;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-primary:hover { background: #2563eb; }
+
+      /* ─── HERO ─── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-top: 60px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-glow {
         position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 15px;
-        width: 2px;
-        background: #30363d;
-        z-index: 0;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+      }
+      .glow-blue {
+        width: 600px; height: 600px;
+        background: rgba(59, 130, 246, 0.08);
+        top: -100px; left: -200px;
+        animation: drift 12s ease-in-out infinite;
+      }
+      .glow-green {
+        width: 400px; height: 400px;
+        background: rgba(16, 185, 129, 0.06);
+        bottom: -100px; right: -100px;
+        animation: drift 16s ease-in-out infinite reverse;
       }
 
-      /* Contribution grid hover effect */
-      .contribution-cell:hover {
-        transform: scale(1.2);
-        transition: transform 0.2s ease;
-        z-index: 10;
+      @keyframes drift {
+        0%, 100% { transform: translate(0, 0); }
+        33% { transform: translate(40px, -30px); }
+        66% { transform: translate(-20px, 20px); }
       }
 
-      /* Background Grid Pattern */
-      .bg-grid-pattern {
-        background-image: linear-gradient(
-            to right,
-            rgba(156, 163, 175, 0.05) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(156, 163, 175, 0.05) 1px,
-            transparent 1px
-          );
-        background-size: 40px 40px;
+      /* Animated grid */
+      .hero-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      }
+
+      .hero-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--accent);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        background: rgba(16, 185, 129, 0.05);
+        padding: 0.35rem 0.875rem;
+        border-radius: 999px;
+        margin-bottom: 1.5rem;
+      }
+
+      .status-dot {
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: pulse-dot 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse-dot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.85); }
+      }
+
+      .hero-title {
+        font-size: clamp(2.25rem, 4vw, 3.75rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.25rem;
+        color: #f9fafb;
+      }
+
+      .hero-title .highlight {
+        background: linear-gradient(135deg, var(--primary), #818cf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-desc {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--muted);
+        margin-bottom: 2rem;
+        max-width: 480px;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-btn {
+        padding: 0.65rem 1.375rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s;
+      }
+
+      .hero-btn-primary {
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 0 20px rgba(59,130,246,0.25);
+      }
+      .hero-btn-primary:hover { background: #2563eb; box-shadow: 0 0 30px rgba(59,130,246,0.35); transform: translateY(-1px); }
+
+      .hero-btn-ghost {
+        border: 1px solid var(--border);
+        color: var(--text);
+        background: rgba(255,255,255,0.03);
+      }
+      .hero-btn-ghost:hover { border-color: #374151; background: rgba(255,255,255,0.06); transform: translateY(-1px); }
+
+      /* ─── TERMINAL ─── */
+      .terminal {
+        background: #0a0e14;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+      }
+
+      .terminal-bar {
+        background: #111827;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+      .terminal-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        color: var(--muted);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .terminal-body {
+        padding: 1.25rem 1.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        line-height: 1.8;
+        color: #cbd5e1;
+        min-height: 280px;
+      }
+
+      .t-prompt { color: var(--accent); }
+      .t-path { color: #60a5fa; }
+      .t-cmd { color: #f3f4f6; }
+      .t-key { color: #f59e0b; }
+      .t-val { color: #a78bfa; }
+      .t-str { color: #34d399; }
+      .t-comment { color: #4b5563; }
+      .t-cursor::after {
+        content: '▋';
+        animation: blink 1s step-start infinite;
+        color: var(--primary);
+      }
+      @keyframes blink { 50% { opacity: 0; } }
+
+      .t-line { display: block; opacity: 0; animation: reveal 0.3s ease forwards; }
+      .t-line:nth-child(1) { animation-delay: 0.3s; }
+      .t-line:nth-child(2) { animation-delay: 0.6s; }
+      .t-line:nth-child(3) { animation-delay: 0.9s; }
+      .t-line:nth-child(4) { animation-delay: 1.2s; }
+      .t-line:nth-child(5) { animation-delay: 1.5s; }
+      .t-line:nth-child(6) { animation-delay: 1.8s; }
+      .t-line:nth-child(7) { animation-delay: 2.1s; }
+      .t-line:nth-child(8) { animation-delay: 2.4s; }
+      .t-line:nth-child(9) { animation-delay: 2.7s; }
+      .t-line:nth-child(10) { animation-delay: 3.0s; }
+      .t-line:nth-child(11) { animation-delay: 3.3s; }
+      .t-line:nth-child(12) { animation-delay: 3.6s; }
+
+      @keyframes reveal { to { opacity: 1; } }
+
+      /* ─── SECTIONS ─── */
+      section { padding: 5rem 1.5rem; }
+
+      .section-inner { max-width: 1200px; margin: 0 auto; }
+
+      .section-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .section-title {
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: #f9fafb;
+        margin-bottom: 0.5rem;
+      }
+
+      .section-desc {
+        color: var(--muted);
+        font-size: 1rem;
+        margin-bottom: 3rem;
+      }
+
+      /* ─── PROJECTS ─── */
+      #projects { background: var(--surface); border-top: 1px solid var(--border); }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .project-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.5rem;
+        transition: all 0.25s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(59,130,246,0.04), transparent);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .project-card:hover {
+        border-color: rgba(59,130,246,0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      }
+
+      .project-card:hover::before { opacity: 1; }
+
+      .project-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 0.875rem;
+      }
+
+      .project-icon {
+        width: 40px; height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+      }
+
+      .project-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        font-weight: 500;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        letter-spacing: 0.05em;
+      }
+
+      .project-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #f3f4f6;
+        margin-bottom: 0.5rem;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .project-desc {
+        font-size: 0.875rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin-bottom: 1.25rem;
+      }
+
+      .project-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .project-lang {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.8rem;
+        color: #9ca3af;
+      }
+
+      .lang-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+      .project-links { display: flex; gap: 0.75rem; }
+      .project-link {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        transition: color 0.2s;
+      }
+      .project-link:hover { color: var(--primary); }
+
+      /* ─── STACK ─── */
+      #stack { background: var(--bg); border-top: 1px solid var(--border); }
+
+      .stack-group { margin-bottom: 2.5rem; }
+
+      .stack-group-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stack-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.625rem;
+      }
+
+      .stack-pill {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.875rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #d1d5db;
+        transition: all 0.2s;
+        cursor: default;
+      }
+
+      .stack-pill:hover {
+        border-color: rgba(59,130,246,0.5);
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      }
+
+      .stack-pill-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+      /* ─── EXPERIENCE ─── */
+      #experience { background: var(--surface); border-top: 1px solid var(--border); }
+
+      .timeline { position: relative; padding-left: 2rem; }
+      .timeline::before {
+        content: '';
+        position: absolute;
+        top: 8px; bottom: 8px; left: 7px;
+        width: 1px;
+        background: linear-gradient(to bottom, var(--primary), var(--border));
+      }
+
+      .timeline-item { position: relative; margin-bottom: 3rem; }
+      .timeline-item:last-child { margin-bottom: 0; }
+
+      .timeline-dot {
+        position: absolute;
+        left: -2rem;
+        top: 6px;
+        width: 15px; height: 15px;
+        border-radius: 50%;
+        border: 2px solid var(--bg);
+        z-index: 1;
+      }
+
+      .timeline-dot-active { background: var(--accent); box-shadow: 0 0 12px rgba(16,185,129,0.5); }
+      .timeline-dot-past { background: var(--muted); }
+
+      .timeline-header { margin-bottom: 1rem; }
+
+      .timeline-role {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #f3f4f6;
+        margin-bottom: 0.25rem;
+      }
+
+      .timeline-company {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .timeline-period {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+
+      .timeline-body {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.25rem;
+      }
+
+      .timeline-body ul { list-style: none; padding: 0; margin: 0; }
+      .timeline-body li {
+        font-size: 0.875rem;
+        color: #9ca3af;
+        line-height: 1.65;
+        padding: 0.35rem 0;
+        padding-left: 1.25rem;
+        position: relative;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+      }
+      .timeline-body li:last-child { border-bottom: none; }
+      .timeline-body li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-size: 0.75rem;
+      }
+
+      .timeline-body li strong { color: #e5e7eb; }
+
+      /* ─── CONTACT ─── */
+      #contact { background: var(--bg); border-top: 1px solid var(--border); }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+
+      .contact-info h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #f3f4f6;
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-info p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+      }
+
+      .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+      .contact-link-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        text-decoration: none;
+        color: #d1d5db;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+      .contact-link-item:hover { border-color: var(--primary); color: white; transform: translateX(4px); }
+
+      .contact-link-icon {
+        width: 32px; height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.05);
+      }
+
+      /* Contact Form */
+      .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+      .form-group { display: flex; flex-direction: column; gap: 0.375rem; }
+      .form-group label { font-size: 0.8rem; font-weight: 500; color: #9ca3af; }
+
+      .form-control {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.625rem 0.875rem;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.875rem;
+        color: #f3f4f6;
+        transition: border-color 0.2s;
+        outline: none;
+        width: 100%;
+      }
+
+      .form-control:focus { border-color: var(--primary); }
+      .form-control::placeholder { color: #4b5563; }
+
+      textarea.form-control { resize: vertical; min-height: 120px; }
+
+      .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+      /* ─── FOOTER ─── */
+      footer {
+        padding: 1.5rem;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+        text-align: center;
+      }
+
+      footer p {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      footer span { color: var(--accent); }
+
+      /* ─── MOBILE NAV ─── */
+      #mobile-menu {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 40;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s;
+      }
+
+      #mobile-menu.open { transform: translateX(0); }
+      #mobile-menu a { font-size: 1.5rem; font-weight: 600; color: var(--text); text-decoration: none; }
+
+      /* ─── RESPONSIVE ─── */
+      @media (max-width: 768px) {
+        .hero-inner { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.25rem; }
+        .nav-links { display: none; }
+        .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+        .form-row { grid-template-columns: 1fr; }
+        .projects-grid { grid-template-columns: 1fr; }
+      }
+
+      /* Fade-in on scroll */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
     </style>
   </head>
-  <body
-    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden transition-colors duration-300"
-  >
-    <nav
-      class="fixed top-0 w-full z-50 border-b border-gray-200 dark:border-border-dark bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md"
-    >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center gap-2">
-            <div
-              class="w-8 h-8 rounded-full bg-white dark:bg-white text-background-dark flex items-center justify-center border border-gray-200 dark:border-none"
-            >
-              <span class="material-symbols-outlined text-[20px]"
-                >terminal</span
-              >
-            </div>
-            <span class="font-bold text-xl tracking-tight"
-              >&lt;JommelHinayon /&gt;</span
-            >
-          </div>
-          <div class="hidden md:flex items-center gap-8">
-            <a
-              class="text-sm font-medium hover:text-primary transition-colors"
-              href="#projects"
-              >Projects</a
-            >
-            <a
-              class="text-sm font-medium hover:text-primary transition-colors"
-              href="#stack"
-              >Stack</a
-            >
-            <a
-              class="text-sm font-medium hover:text-primary transition-colors"
-              href="#experience"
-              >Experience</a
-            >
-            <a
-              class="text-sm font-medium hover:text-primary transition-colors"
-              href="#contact"
-              >Contact</a
-            >
-          </div>
-          <div class="flex items-center gap-3">
-            <a
-              class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors p-2"
-              href="https://github.com/jommel1998"
-              target="_blank"
-              title="GitHub"
-            >
-              <svg viewBox="0 0 24 24" class="w-[20px] h-[20px] fill-current">
-                <path
-                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                />
-              </svg>
-            </a>
-            <button
-              class="p-2 rounded-lg bg-gray-200 dark:bg-card-dark hover:bg-gray-300 dark:hover:bg-border-dark transition-colors text-gray-700 dark:text-gray-200"
-              id="theme-toggle"
-            >
-              <span class="material-symbols-outlined text-[20px]"
-                >dark_mode</span
-              >
-            </button>
-            <button
-              id="mobile-menu-btn"
-              class="md:hidden p-2 text-gray-600 dark:text-gray-300"
-            >
-              <span class="material-symbols-outlined">menu</span>
-            </button>
-          </div>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-inner">
+        <div class="nav-logo">
+          <span style="color: var(--accent)">~/</span>jommel<span class="dot">.</span>dev
         </div>
-      </div>
-      <div
-        id="mobile-menu"
-        class="fixed inset-0 bg-background-light dark:bg-background-dark z-40 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-center items-center gap-8 text-xl"
-      >
-        <a
-          class="mobile-link font-medium hover:text-primary transition-colors"
-          href="#projects"
-          >Projects</a
-        >
-        <a
-          class="mobile-link font-medium hover:text-primary transition-colors"
-          href="#stack"
-          >Stack</a
-        >
-        <a
-          class="mobile-link font-medium hover:text-primary transition-colors"
-          href="#experience"
-          >Experience</a
-        >
-        <a
-          class="mobile-link font-medium hover:text-primary transition-colors"
-          href="#contact"
-          >Contact</a
-        >
+        <div class="nav-links">
+          <a href="#projects">projects</a>
+          <a href="#stack">stack</a>
+          <a href="#experience">experience</a>
+          <a href="#contact">contact</a>
+        </div>
+        <div class="nav-cta">
+          <a href="https://github.com/jommel1998" target="_blank" class="btn-outline nav-github-btn" style="display:flex;align-items:center;gap:0.4rem;">
+            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="#contact" class="btn-primary nav-hire-btn">
+            <span class="material-symbols-outlined" style="font-size:14px">mail</span>
+            Hire Me
+          </a>
+          <button id="mobile-menu-btn" class="mobile-menu-btn" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--text);cursor:pointer;padding:0.3rem 0.4rem;display:none;align-items:center;">
+            <span class="material-symbols-outlined" style="font-size:20px">menu</span>
+          </button>
+        </div>
       </div>
     </nav>
 
-    <main class="pt-16 min-h-screen flex flex-col">
-      <section
-        class="relative flex flex-col items-center justify-center min-h-[90vh] px-4 w-full overflow-hidden"
-      >
-        <div class="absolute inset-0 z-0 overflow-hidden">
-          <div
-            class="absolute inset-0 bg-grid-pattern animate-grid-move z-0 opacity-40 dark:opacity-30"
-          ></div>
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu">
+      <a href="#projects" class="mobile-link">Projects</a>
+      <a href="#stack" class="mobile-link">Stack</a>
+      <a href="#experience" class="mobile-link">Experience</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+    </div>
 
-          <div
-            class="absolute top-0 left-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] animate-blob mix-blend-multiply dark:mix-blend-screen"
-          ></div>
-          <div
-            class="absolute bottom-0 right-[-10%] w-[500px] h-[500px] bg-success/10 rounded-full blur-[100px] animate-blob animation-delay-2000 mix-blend-multiply dark:mix-blend-screen"
-          ></div>
-          <div
-            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px] animate-blob animation-delay-4000 mix-blend-multiply dark:mix-blend-screen"
-          ></div>
-
-          <div
-            class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-20 dark:opacity-10"
-          >
-            <span
-              class="absolute bottom-[-50px] left-[10%] text-4xl font-mono text-primary animate-float-code"
-              style="animation-duration: 15s; animation-delay: 0s"
-              >&lt;/&gt;</span
-            >
-            <span
-              class="absolute bottom-[-50px] left-[25%] text-xl font-mono text-gray-500 animate-float-code"
-              style="animation-duration: 22s; animation-delay: 2s"
-              >git push</span
-            >
-            <span
-              class="absolute bottom-[-50px] left-[40%] text-3xl font-mono text-success animate-float-code"
-              style="animation-duration: 18s; animation-delay: 5s"
-              >{ }</span
-            >
-            <span
-              class="absolute bottom-[-50px] left-[60%] text-2xl font-mono text-blue-400 animate-float-code"
-              style="animation-duration: 25s; animation-delay: 1s"
-              >docker</span
-            >
-            <span
-              class="absolute bottom-[-50px] left-[75%] text-lg font-mono text-gray-500 animate-float-code"
-              style="animation-duration: 20s; animation-delay: 7s"
-              >sudo</span
-            >
-            <span
-              class="absolute bottom-[-50px] left-[85%] text-2xl font-mono text-purple-400 animate-float-code"
-              style="animation-duration: 17s; animation-delay: 3s"
-              >npm</span
-            >
-            <span
-              class="absolute bottom-[-50px] left-[15%] text-lg font-mono text-gray-400 animate-float-code"
-              style="animation-duration: 28s; animation-delay: 10s"
-              >0101</span
-            >
-            <span
-              class="absolute bottom-[-50px] left-[50%] text-xl font-mono text-primary animate-float-code"
-              style="animation-duration: 30s; animation-delay: 12s"
-              >ssh</span
-            >
-          </div>
-        </div>
-
-        <div
-          class="relative z-10 w-full max-w-6xl flex flex-col md:flex-row items-center gap-12"
-        >
-          <div class="flex-1 text-center md:text-left fade-in-left">
-            <div
-              class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 dark:border-border-dark bg-white/50 dark:bg-card-dark/50 backdrop-blur-sm text-xs font-mono mb-6 shadow-sm"
-            >
-              <span
-                class="w-2 h-2 rounded-full bg-success animate-pulse"
-              ></span>
-              Open to Opportunities
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-glow glow-blue"></div>
+        <div class="hero-glow glow-green"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-inner">
+          <div>
+            <div class="status-badge">
+              <div class="status-dot"></div>
+              Available for new opportunities
             </div>
-            <h1
-              class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6"
-            >
-              Bridging legacy systems with
-              <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400"
-                >modern standards</span
-              >.
+            <h1 class="hero-title">
+              Full-Stack Dev<br>
+              building <span class="highlight">production-grade</span><br>
+              web systems.
             </h1>
-            <p
-              class="text-lg text-gray-600 dark:text-text-secondary mb-8 max-w-xl mx-auto md:mx-0"
-            >
-              Full Stack Developer with 4+ years of experience. I build scalable
-              web applications using Laravel, Next.js, and Docker, focusing on
-              database efficiency and maintainable code.
+            <p class="hero-desc">
+              4+ years shipping Laravel backends, Next.js frontends, and Docker-powered deployments. I bridge legacy systems with modern standards — fast, clean, and maintainable.
             </p>
-            <div
-              class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start"
-            >
-              <a
-                class="px-6 py-3 rounded-md bg-success hover:bg-success/90 text-white font-semibold transition-colors shadow-lg shadow-success/20 flex items-center justify-center gap-2"
-                href="#projects"
-              >
-                <span class="material-symbols-outlined text-[20px]"
-                  >folder_open</span
-                >
-                View Work
+            <div class="hero-actions">
+              <a href="#projects" class="hero-btn hero-btn-primary">
+                <span class="material-symbols-outlined" style="font-size:16px">folder_open</span>
+                View Projects
               </a>
-              <a
-                class="px-6 py-3 rounded-md bg-primary hover:bg-primary/90 text-white font-semibold transition-colors shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
-                href="/path/to/Jommel_Hinayon_Resume_Final_V3.pdf"
-                download
-              >
-                <span class="material-symbols-outlined text-[20px]"
-                  >download</span
-                >
-                Download CV
+              <a href="#contact" class="hero-btn hero-btn-ghost">
+                <span class="material-symbols-outlined" style="font-size:16px">mail</span>
+                Get in Touch
               </a>
-              <a
-                class="px-6 py-3 rounded-md border border-gray-300 dark:border-border-dark bg-white/80 dark:bg-card-dark/80 backdrop-blur-sm hover:bg-gray-50 dark:hover:bg-border-dark text-gray-900 dark:text-white font-semibold transition-colors flex items-center justify-center gap-2"
-                href="#contact"
-              >
-                <span class="material-symbols-outlined text-[20px]">mail</span>
-                Contact Me
+              <a href="#" download class="hero-btn hero-btn-ghost">
+                <span class="material-symbols-outlined" style="font-size:16px">download</span>
+                Resume
               </a>
             </div>
           </div>
-          <div
-            class="flex-1 w-full max-w-lg fade-in-right delay-200 mt-8 md:mt-0"
-          >
-            <div
-              class="rounded-xl overflow-hidden shadow-2xl bg-[#0d1117]/90 backdrop-blur-md border border-border-dark font-mono text-sm"
-            >
-              <div
-                class="bg-card-dark px-4 py-3 border-b border-border-dark flex items-center gap-2"
-              >
-                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-                <div class="ml-4 text-xs text-text-secondary">
-                  jommel@devbox:~
-                </div>
+          <div>
+            <div class="terminal">
+              <div class="terminal-bar">
+                <div class="terminal-dot" style="background:#ff5f56"></div>
+                <div class="terminal-dot" style="background:#ffbd2e"></div>
+                <div class="terminal-dot" style="background:#27c93f"></div>
+                <div class="terminal-title">jommel@devbox — ~</div>
               </div>
-              <div class="p-6 text-gray-300 space-y-4 min-h-[300px]">
-                <div>
-                  <span class="text-success">➜</span>
-                  <span class="text-blue-400">~</span>
-                  <span class="typing-cursor">whoami</span>
-                </div>
-                <div
-                  class="pl-4 text-gray-400 opacity-0 animate-[fadeInUp_0.5s_1s_forwards]"
-                >
-                  &gt; Full Stack Developer<br />
-                  &gt; Laravel &amp; Next.js Expert<br />
-                  &gt; DevOps Enthusiast (HomeLabber)
-                </div>
-                <div class="opacity-0 animate-[fadeInUp_0.5s_2s_forwards]">
-                  <span class="text-success">➜</span>
-                  <span class="text-blue-400">~</span> cat skills.json
-                </div>
-                <div
-                  class="pl-4 text-yellow-200 opacity-0 animate-[fadeInUp_0.5s_2.5s_forwards]"
-                >
-                  {<br />
-                    "backend": ["Laravel", "CodeIgniter", "PHP"],<br />
-                    "frontend": ["Next.js", "Vue.js", "React"],<br />
-                    "db": ["MySQL", "Firebase"],<br />
-                    "tools": ["Docker", "Linux", "Git"]<br />
-                  }
-                </div>
+              <div class="terminal-body">
+                <span class="t-line"><span class="t-prompt">❯</span> <span class="t-path">~</span> <span class="t-cmd t-cursor">whoami</span></span>
+                <span class="t-line"><span style="color:#4b5563"># Jommel Hinayon — Full Stack Developer</span></span>
+                <span class="t-line">&nbsp;</span>
+                <span class="t-line"><span class="t-prompt">❯</span> <span class="t-path">~</span> <span class="t-cmd">cat profile.json</span></span>
+                <span class="t-line"><span style="color:#374151">{</span></span>
+                <span class="t-line">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-str">"Full Stack Developer"</span>,</span>
+                <span class="t-line">&nbsp;&nbsp;<span class="t-key">"exp"</span>: <span class="t-val">"4+ years"</span>,</span>
+                <span class="t-line">&nbsp;&nbsp;<span class="t-key">"backend"</span>: <span class="t-str">["Laravel", "CodeIgniter", "PHP"]</span>,</span>
+                <span class="t-line">&nbsp;&nbsp;<span class="t-key">"frontend"</span>: <span class="t-str">["Next.js", "React", "Vue.js"]</span>,</span>
+                <span class="t-line">&nbsp;&nbsp;<span class="t-key">"devops"</span>: <span class="t-str">["Docker", "CI/CD", "Linux"]</span>,</span>
+                <span class="t-line">&nbsp;&nbsp;<span class="t-key">"status"</span>: <span class="t-str" style="color:var(--accent)">"open_to_work"</span></span>
+                <span class="t-line"><span style="color:#374151">}</span></span>
               </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="absolute bottom-8 animate-bounce text-gray-400 hidden md:block"
-        >
-          <span class="material-symbols-outlined">keyboard_arrow_down</span>
-        </div>
-      </section>
-
-      <section
-        class="py-20 px-4 bg-white dark:bg-[#0d1117] border-t border-gray-200 dark:border-border-dark"
-        id="projects"
-      >
-        <div class="max-w-7xl mx-auto">
-          <h2 class="text-3xl font-bold mb-2 flex items-center gap-2">
-            <span class="material-symbols-outlined">book</span>
-            Featured Projects
-          </h2>
-          <p class="text-gray-600 dark:text-text-secondary mb-10">
-            A mix of professional work and personal labs.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div
-              class="group bg-gray-50 dark:bg-card-dark border border-gray-200 dark:border-border-dark rounded-md p-6 hover:border-gray-400 dark:hover:border-gray-500 transition-all hover:-translate-y-1 fade-in-up"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-2 text-primary font-semibold">
-                  <span class="material-symbols-outlined text-sm"
-                    >bookmark</span
-                  >
-                  <span>fin_track</span>
-                </div>
-                <div
-                  class="px-2 py-0.5 rounded-full border border-border-dark text-xs text-text-secondary"
-                >
-                  Side Project
-                </div>
-              </div>
-              <p
-                class="text-sm text-gray-600 dark:text-text-secondary mb-6 h-12 overflow-hidden"
-              >
-                A comprehensive personal finance tracker built to manage expenses
-                and visualize savings goals.
-              </p>
-              <div
-                class="flex items-center gap-6 text-xs text-gray-500 dark:text-gray-400 mt-auto"
-              >
-                <div class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
-                  <span>JavaScript/Vue</span>
-                </div>
-                <div class="flex items-center gap-1">
-                  <span class="material-symbols-outlined text-sm">star</span>
-                  <span>Active</span>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="group bg-gray-50 dark:bg-card-dark border border-gray-200 dark:border-border-dark rounded-md p-6 hover:border-gray-400 dark:hover:border-gray-500 transition-all hover:-translate-y-1 fade-in-up delay-100"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-2 text-primary font-semibold">
-                  <span class="material-symbols-outlined text-sm"
-                    >bookmark</span
-                  >
-                  <span>homelab-cluster</span>
-                </div>
-                <div
-                  class="px-2 py-0.5 rounded-full border border-border-dark text-xs text-text-secondary"
-                >
-                  Infrastructure
-                </div>
-              </div>
-              <p
-                class="text-sm text-gray-600 dark:text-text-secondary mb-6 h-12 overflow-hidden"
-              >
-                Self-hosted environment running on Optiplex Micro PCs. Managed
-                with Docker, Portainer, and Cloudflare Tunnels.
-              </p>
-              <div
-                class="flex items-center gap-6 text-xs text-gray-500 dark:text-gray-400 mt-auto"
-              >
-                <div class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 rounded-full bg-blue-600"></span>
-                  <span>Docker</span>
-                </div>
-                <div class="flex items-center gap-1">
-                  <span class="material-symbols-outlined text-sm">dns</span>
-                  <span>3 Nodes</span>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="group bg-gray-50 dark:bg-card-dark border border-gray-200 dark:border-border-dark rounded-md p-6 hover:border-gray-400 dark:hover:border-gray-500 transition-all hover:-translate-y-1 fade-in-up delay-200"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-2 text-primary font-semibold">
-                  <span class="material-symbols-outlined text-sm"
-                    >bookmark</span
-                  >
-                  <span>logistics-platform</span>
-                </div>
-                <div
-                  class="px-2 py-0.5 rounded-full border border-border-dark text-xs text-text-secondary"
-                >
-                  Professional
-                </div>
-              </div>
-              <p
-                class="text-sm text-gray-600 dark:text-text-secondary mb-6 h-12 overflow-hidden"
-              >
-                Internal tracking tools for logistics, handling real-time data
-                updates and complex shipping reports.
-              </p>
-              <div
-                class="flex items-center gap-6 text-xs text-gray-500 dark:text-gray-400 mt-auto"
-              >
-                <div class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 rounded-full bg-indigo-500"></span>
-                  <span>Laravel</span>
-                </div>
-                <div class="flex items-center gap-1">
-                  <span class="material-symbols-outlined text-sm"
-                    >database</span
-                  >
-                  <span>MySQL</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mt-8 text-center">
-            <a
-              href="https://github.com/jommel1998"
-              target="_blank"
-              class="text-sm font-semibold text-gray-500 dark:text-text-secondary hover:text-primary transition-colors inline-flex items-center gap-1"
-            >
-              View GitHub Profile
-              <span class="material-symbols-outlined text-sm"
-                >arrow_forward</span
-              >
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="py-20 px-4 bg-gray-50 dark:bg-[#12161c]" id="stack">
-        <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl font-bold mb-12">Technical Arsenal</h2>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            <div class="col-span-2 md:col-span-4 text-left mb-4">
-              <h3
-                class="text-sm uppercase tracking-wider text-gray-500 dark:text-text-secondary font-semibold mb-6 border-b border-gray-200 dark:border-border-dark pb-2"
-              >
-                Frontend &amp; Frameworks
-              </h3>
-            </div>
-            <div
-              class="flex flex-col items-center gap-3 p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors shadow-sm fade-in-up"
-            >
-              <span class="material-symbols-outlined text-4xl text-white"
-                >css</span
-              >
-              <span class="font-medium text-sm">Next.js</span>
-            </div>
-            <div
-              class="flex flex-col items-center gap-3 p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors shadow-sm fade-in-up delay-100"
-            >
-              <span class="material-symbols-outlined text-4xl text-[#42b883]"
-                >code</span
-              >
-              <span class="font-medium text-sm">Vue.js</span>
-            </div>
-            <div
-              class="flex flex-col items-center gap-3 p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors shadow-sm fade-in-up delay-200"
-            >
-              <span class="material-symbols-outlined text-4xl text-[#61DAFB]"
-                >html</span
-              >
-              <span class="font-medium text-sm">React</span>
-            </div>
-            <div
-              class="flex flex-col items-center gap-3 p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors shadow-sm fade-in-up delay-300"
-            >
-              <span class="material-symbols-outlined text-4xl text-[#38B2AC]"
-                >brush</span
-              >
-              <span class="font-medium text-sm">Tailwind</span>
-            </div>
-
-            <div class="col-span-2 md:col-span-4 text-left mb-4 mt-8">
-              <h3
-                class="text-sm uppercase tracking-wider text-gray-500 dark:text-text-secondary font-semibold mb-6 border-b border-gray-200 dark:border-border-dark pb-2"
-              >
-                Backend &amp; DevOps
-              </h3>
-            </div>
-            <div
-              class="flex flex-col items-center gap-3 p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors shadow-sm fade-in-up"
-            >
-              <span class="material-symbols-outlined text-4xl text-[#FF2D20]"
-                >php</span
-              >
-              <span class="font-medium text-sm">Laravel</span>
-            </div>
-            <div
-              class="flex flex-col items-center gap-3 p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors shadow-sm fade-in-up delay-100"
-            >
-              <span class="material-symbols-outlined text-4xl text-[#EE4323]"
-                >local_fire_department</span
-              >
-              <span class="font-medium text-sm">CodeIgniter</span>
-            </div>
-            <div
-              class="flex flex-col items-center gap-3 p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors shadow-sm fade-in-up delay-200"
-            >
-              <span class="material-symbols-outlined text-4xl text-[#00758F]"
-                >database</span
-              >
-              <span class="font-medium text-sm">MySQL</span>
-            </div>
-            <div
-              class="flex flex-col items-center gap-3 p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors shadow-sm fade-in-up delay-300"
-            >
-              <span class="material-symbols-outlined text-4xl text-[#2496ED]"
-                >deployed_code</span
-              >
-              <span class="font-medium text-sm">Docker</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="py-20 px-4 bg-white dark:bg-[#0d1117]" id="experience">
-        <div class="max-w-4xl mx-auto">
-          <h2 class="text-3xl font-bold mb-12 text-center">
-            Professional Journey
-          </h2>
-          <div class="relative timeline-line pl-8 md:pl-0">
-            <div
-              class="mb-12 relative md:flex md:justify-between items-start md:items-center group fade-in-up"
-            >
-              <div
-                class="absolute -left-[23px] md:left-1/2 md:-ml-[10px] top-1 w-5 h-5 rounded-full border-4 border-white dark:border-[#0d1117] bg-success z-10"
-              ></div>
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="section-inner">
+          <p class="section-label">// featured work</p>
+          <h2 class="section-title">Projects</h2>
+          <p class="section-desc">A selection of professional work and personal builds.</p>
+          <div class="projects-grid">
 
-              <div class="md:w-[45%] mb-4 md:mb-0 md:text-right order-1">
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-                  Full Stack Developer
-                </h3>
-                <p class="text-primary font-medium">
-                  Eisenbach Consulting, LLC
-                </p>
-                <span
-                  class="text-sm text-gray-500 dark:text-text-secondary block mt-1"
-                  >May 2022 - Present</span
-                >
+            <div class="project-card reveal">
+              <div class="project-top">
+                <div class="project-icon" style="background:rgba(245,158,11,0.1)">💰</div>
+                <span class="project-tag">Side Project</span>
               </div>
+              <div class="project-name">fin_track</div>
+              <div class="project-desc">Personal finance tracker to manage expenses, set savings goals, and visualize spending patterns over time.</div>
+              <div class="project-footer">
+                <div class="project-lang">
+                  <div class="lang-dot" style="background:#f59e0b"></div>
+                  JavaScript / Vue
+                </div>
+                <div class="project-links">
+                  <a href="https://github.com/jommel1998" target="_blank" class="project-link">
+                    <span class="material-symbols-outlined" style="font-size:14px">code</span> Code
+                  </a>
+                </div>
+              </div>
+            </div>
 
-              <div
-                class="md:w-[45%] order-2 bg-gray-50 dark:bg-card-dark p-5 rounded-lg border border-gray-200 dark:border-border-dark"
-              >
-                <ul
-                  class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-2"
-                >
-                  <li>
-                    Architected full-stack applications using Laravel,
-                    CodeIgniter, and Next.js.
-                  </li>
-                  <li>
-                    Modernized legacy PHP codebases to React and Vue.js,
-                    improving performance.
-                  </li>
-                  <li>
-                    Optimized complex MySQL schemas for high concurrency.
-                  </li>
-                  <li>
-                    Streamlined deployments with Docker, reducing setup time by
-                    40%.
-                  </li>
+            <div class="project-card reveal">
+              <div class="project-top">
+                <div class="project-icon" style="background:rgba(59,130,246,0.1)">🖥️</div>
+                <span class="project-tag">Infrastructure</span>
+              </div>
+              <div class="project-name">homelab-cluster</div>
+              <div class="project-desc">Self-hosted 3-node cluster running on Optiplex Micro PCs. Managed with Docker, Portainer, and Cloudflare Tunnels for zero-trust remote access.</div>
+              <div class="project-footer">
+                <div class="project-lang">
+                  <div class="lang-dot" style="background:#2496ed"></div>
+                  Docker / Linux
+                </div>
+                <div class="project-links">
+                  <span class="project-link" style="color:#6b7280;cursor:default">
+                    <span class="material-symbols-outlined" style="font-size:14px">dns</span> 3 Nodes
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-card reveal">
+              <div class="project-top">
+                <div class="project-icon" style="background:rgba(16,185,129,0.1)">📦</div>
+                <span class="project-tag">Professional</span>
+              </div>
+              <div class="project-name">logistics-platform</div>
+              <div class="project-desc">Internal tracking system for a global logistics company. Handles real-time shipment data, complex MySQL queries, and shipping report generation.</div>
+              <div class="project-footer">
+                <div class="project-lang">
+                  <div class="lang-dot" style="background:#ff2d20"></div>
+                  Laravel / Vue
+                </div>
+                <div class="project-links">
+                  <span class="project-link" style="color:#6b7280;cursor:default">
+                    <span class="material-symbols-outlined" style="font-size:14px">lock</span> Private
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-card reveal" style="border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:200px;color:var(--muted)">
+              <span class="material-symbols-outlined" style="font-size:2rem;margin-bottom:0.5rem;opacity:0.4">add_circle</span>
+              <p style="font-size:0.875rem">More on GitHub</p>
+              <a href="https://github.com/jommel1998" target="_blank" style="font-size:0.8rem;color:var(--primary);text-decoration:none;margin-top:0.5rem;font-weight:600">github.com/jommel1998 →</a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- STACK -->
+      <section id="stack">
+        <div class="section-inner">
+          <p class="section-label">// tools of the trade</p>
+          <h2 class="section-title">Tech Stack</h2>
+          <p class="section-desc">Technologies I work with daily and ship to production.</p>
+
+          <div class="stack-group reveal">
+            <div class="stack-group-label">Frontend & Frameworks</div>
+            <div class="stack-pills">
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#000"></div>Next.js</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#61dafb"></div>React</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#42b883"></div>Vue.js</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#38bdf8"></div>Tailwind CSS</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#f7df1e"></div>JavaScript (ES6+)</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#e34c26"></div>HTML5 / CSS3</div>
+            </div>
+          </div>
+
+          <div class="stack-group reveal">
+            <div class="stack-group-label">Backend & Databases</div>
+            <div class="stack-pills">
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#ff2d20"></div>Laravel</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#ee4323"></div>CodeIgniter</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#777bb4"></div>PHP</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#00758f"></div>MySQL</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#ffca28"></div>Firebase</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#4db33d"></div>RESTful APIs</div>
+            </div>
+          </div>
+
+          <div class="stack-group reveal">
+            <div class="stack-group-label">DevOps & Tools</div>
+            <div class="stack-pills">
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#2496ed"></div>Docker</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#326ce5"></div>Kubernetes</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#2671e5"></div>GitHub Actions</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#f05033"></div>Git</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#ff6c37"></div>Postman</div>
+              <div class="stack-pill"><div class="stack-pill-dot" style="background:#4caf50"></div>Linux / Unix</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <div class="section-inner">
+          <p class="section-label">// career path</p>
+          <h2 class="section-title">Experience</h2>
+          <p class="section-desc">Where I've worked and what I've shipped.</p>
+
+          <div class="timeline">
+
+            <div class="timeline-item reveal">
+              <div class="timeline-dot timeline-dot-active"></div>
+              <div class="timeline-header">
+                <div class="timeline-role">Full Stack Developer</div>
+                <div class="timeline-company">Eisenbach Consulting, LLC</div>
+                <div class="timeline-period">
+                  <span class="material-symbols-outlined" style="font-size:13px">calendar_today</span>
+                  May 2022 — Present · Remote
+                </div>
+              </div>
+              <div class="timeline-body">
+                <ul>
+                  <li>Architected and maintained full-stack apps using <strong>Laravel, CodeIgniter, and Next.js</strong>, improving system reliability across client platforms.</li>
+                  <li>Led migration of legacy PHP codebases to <strong>React and Vue.js</strong>, delivering measurably faster UIs.</li>
+                  <li>Designed <strong>MySQL schemas</strong> for high-concurrency data requests, ensuring integrity across production environments.</li>
+                  <li>Streamlined CI/CD and Docker pipelines, <strong>cutting environment setup time by 40%</strong>.</li>
+                  <li>Grew from IC to owning feature architecture decisions and leading code reviews.</li>
                 </ul>
               </div>
             </div>
 
-            <div
-              class="mb-12 relative md:flex md:justify-between items-start md:items-center group fade-in-up delay-100"
-            >
-              <div
-                class="absolute -left-[23px] md:left-1/2 md:-ml-[10px] top-1 w-5 h-5 rounded-full border-4 border-white dark:border-[#0d1117] bg-gray-400 dark:bg-gray-600 z-10"
-              ></div>
-
-              <div
-                class="md:w-[45%] mb-4 md:mb-0 md:text-right md:order-1 md:hidden"
-              >
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-                  OJT - Web Developer
-                </h3>
-                <p class="text-primary font-medium">Kuehne + Nagel</p>
-                <span
-                  class="text-sm text-gray-500 dark:text-text-secondary block mt-1"
-                  >Nov 2019 - Apr 2022</span
-                >
+            <div class="timeline-item reveal">
+              <div class="timeline-dot timeline-dot-past"></div>
+              <div class="timeline-header">
+                <div class="timeline-role">OJT — Programmer / Web Developer</div>
+                <div class="timeline-company">Kuehne + Nagel</div>
+                <div class="timeline-period">
+                  <span class="material-symbols-outlined" style="font-size:13px">calendar_today</span>
+                  Nov 2019 — Apr 2022 · Cebu, Philippines
+                </div>
               </div>
-
-              <div
-                class="md:w-[45%] order-1 bg-gray-50 dark:bg-card-dark p-5 rounded-lg border border-gray-200 dark:border-border-dark"
-              >
-                <ul
-                  class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-2"
-                >
-                  <li>
-                    Developed internal logistics tracking tools using Laravel
-                    and Vue.js.
-                  </li>
-                  <li>
-                    Managed MySQL databases for real-time shipping reports.
-                  </li>
-                  <li>
-                    Collaborated with senior engineers to troubleshoot UI/UX and
-                    backend issues.
-                  </li>
+              <div class="timeline-body">
+                <ul>
+                  <li>Built internal <strong>logistics tracking tools</strong> using Laravel and Vue.js, enabling real-time shipment visibility.</li>
+                  <li>Managed and queried <strong>MySQL databases</strong> for accurate shipping reports used by operations teams.</li>
+                  <li>Collaborated with senior engineers to troubleshoot UI/UX and backend logic issues in enterprise-scale systems.</li>
                 </ul>
               </div>
-
-              <div class="md:w-[45%] order-2 hidden md:block text-left pl-8">
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-                  OJT - Web Developer
-                </h3>
-                <p class="text-primary font-medium">Kuehne + Nagel</p>
-                <span
-                  class="text-sm text-gray-500 dark:text-text-secondary block mt-1"
-                  >Nov 2019 - Apr 2022</span
-                >
-              </div>
             </div>
+
           </div>
         </div>
       </section>
 
-      <section
-        class="py-16 px-4 border-t border-gray-200 dark:border-border-dark bg-gray-50 dark:bg-[#0d1117]"
-      >
-        <div class="max-w-5xl mx-auto">
-          <h2 class="text-xl font-bold mb-6">Recent Contributions</h2>
-          <div
-            class="p-6 rounded-xl border border-gray-200 dark:border-border-dark bg-white dark:bg-card-dark overflow-x-auto"
-          >
-            <div class="min-w-[700px] flex gap-1">
-              <div
-                class="flex flex-col gap-1 text-xs text-text-secondary pr-2 pt-5"
-              >
-                <div class="h-[10px]">Mon</div>
-                <div class="h-[10px]"></div>
-                <div class="h-[10px]">Wed</div>
-                <div class="h-[10px]"></div>
-                <div class="h-[10px]">Fri</div>
-              </div>
-              <div class="flex gap-1 flex-1">
-                <script>
-                  const levels = [
-                    "bg-gray-100 dark:bg-[#161b22]",
-                    "bg-[#9be9a8]",
-                    "bg-[#40c463]",
-                    "bg-[#30a14e]",
-                    "bg-[#216e39]",
-                  ];
-                  const container = document.currentScript.parentElement;
-                  for (let i = 0; i < 52; i++) {
-                    let col = document.createElement("div");
-                    col.className = "flex flex-col gap-1";
-                    for (let j = 0; j < 7; j++) {
-                      let cell = document.createElement("div");
-                      let level = Math.floor(Math.random() * 5);
-                      if (Math.random() > 0.4) level = 0;
-                      cell.className = `w-[10px] h-[10px] rounded-sm contribution-cell ${levels[level]}`;
-                      col.appendChild(cell);
-                    }
-                    container.appendChild(col);
-                  }
-                </script>
-              </div>
-            </div>
-            <div
-              class="flex items-center justify-end gap-2 mt-4 text-xs text-text-secondary"
-            >
-              <span>Less</span>
-              <div
-                class="w-[10px] h-[10px] rounded-sm bg-gray-100 dark:bg-[#161b22]"
-              ></div>
-              <div class="w-[10px] h-[10px] rounded-sm bg-[#9be9a8]"></div>
-              <div class="w-[10px] h-[10px] rounded-sm bg-[#40c463]"></div>
-              <div class="w-[10px] h-[10px] rounded-sm bg-[#30a14e]"></div>
-              <div class="w-[10px] h-[10px] rounded-sm bg-[#216e39]"></div>
-              <span>More</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-inner">
+          <p class="section-label">// get in touch</p>
+          <h2 class="section-title">Let's Build Together</h2>
+          <p class="section-desc">Open to full-time roles, freelance projects, and collaborations.</p>
 
-      <section
-        class="py-20 px-4 bg-white dark:bg-[#0d1117] border-t border-gray-200 dark:border-border-dark"
-        id="contact"
-      >
-        <div class="max-w-3xl mx-auto">
-          <h2 class="text-3xl font-bold mb-2 text-center">
-            Let's build together
-          </h2>
-          <p class="text-center text-gray-500 dark:text-text-secondary mb-10">
-            Have a project in mind or want to discuss my resume?
-          </p>
-          <div
-            class="bg-gray-50 dark:bg-card-dark rounded-lg border border-gray-200 dark:border-border-dark overflow-hidden shadow-lg"
-          >
-            <div
-              class="bg-gray-100 dark:bg-[#161b22] border-b border-gray-200 dark:border-border-dark px-4 py-3 flex items-center justify-between"
-            >
-              <span
-                class="text-sm font-semibold text-gray-700 dark:text-gray-300"
-                >New Message</span
-              >
-              <div class="flex gap-2">
-                <span
-                  class="w-3 h-3 rounded-full bg-gray-300 dark:bg-border-dark"
-                ></span>
-                <span
-                  class="w-3 h-3 rounded-full bg-gray-300 dark:bg-border-dark"
-                ></span>
+          <div class="contact-grid">
+            <div class="contact-info">
+              <h3>Drop me a message</h3>
+              <p>Whether you have a project in mind, want to discuss a role, or just want to connect — I'd love to hear from you.</p>
+              <div class="contact-links">
+                <a href="mailto:joar.hinayo@gmail.com" class="contact-link-item">
+                  <div class="contact-link-icon">
+                    <span class="material-symbols-outlined" style="font-size:16px">mail</span>
+                  </div>
+                  joar.hinayo@gmail.com
+                </a>
+                <a href="https://github.com/jommel1998" target="_blank" class="contact-link-item">
+                  <div class="contact-link-icon">
+                    <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                  </div>
+                  github.com/jommel1998
+                </a>
               </div>
             </div>
-            <div class="p-6">
-              <form class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label
-                      class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                      >Name</label
-                    >
-                    <input
-                      class="w-full rounded-md border-gray-300 dark:border-border-dark bg-white dark:bg-[#0d1117] text-gray-900 dark:text-white focus:ring-primary focus:border-primary"
-                      placeholder="Your Name"
-                      type="text"
-                    />
+
+            <div>
+              <div class="contact-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" type="text" placeholder="Your name" />
                   </div>
-                  <div>
-                    <label
-                      class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                      >Email</label
-                    >
-                    <input
-                      class="w-full rounded-md border-gray-300 dark:border-border-dark bg-white dark:bg-[#0d1117] text-gray-900 dark:text-white focus:ring-primary focus:border-primary"
-                      placeholder="you@company.com"
-                      type="email"
-                    />
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-control" type="email" placeholder="you@company.com" />
                   </div>
                 </div>
-                <div>
-                  <label
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                    >Message</label
-                  >
-                  <div class="relative">
-                    <textarea
-                      class="w-full rounded-md border-gray-300 dark:border-border-dark bg-white dark:bg-[#0d1117] text-gray-900 dark:text-white focus:ring-primary focus:border-primary font-mono text-sm p-3"
-                      placeholder="Hi Jommel, I saw your portfolio..."
-                      rows="6"
-                    ></textarea>
-                    <span
-                      class="absolute bottom-2 right-2 text-xs text-gray-400"
-                      >Markdown supported</span
-                    >
-                  </div>
+                <div class="form-group">
+                  <label>Subject</label>
+                  <input class="form-control" type="text" placeholder="Project inquiry, job offer, etc." />
                 </div>
-                <div class="flex justify-end pt-2">
-                  <button
-                    class="px-6 py-2 bg-success hover:bg-success/90 text-white font-medium rounded-md transition-colors shadow-sm w-full md:w-auto"
-                    type="button"
-                  >
-                    Send Message
-                  </button>
+                <div class="form-group">
+                  <label>Message</label>
+                  <textarea class="form-control" placeholder="Hi Jommel, I'd like to discuss..."></textarea>
                 </div>
-              </form>
+                <button class="btn-primary" style="width:100%;justify-content:center;padding:0.7rem;">
+                  <span class="material-symbols-outlined" style="font-size:16px">send</span>
+                  Send Message
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="mt-8 text-center text-sm text-gray-500">
-            Or email me directly at
-            <a
-              href="mailto:joar.hinayo@gmail.com"
-              class="text-primary hover:underline"
-              >joar.hinayo@gmail.com</a
-            >
           </div>
         </div>
       </section>
     </main>
-    <footer
-      class="py-8 bg-gray-50 dark:bg-background-dark border-t border-gray-200 dark:border-border-dark text-center"
-    >
-      <div class="flex justify-center gap-6 mb-4">
-        <a
-          class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-          href="https://github.com/jommel1998"
-          target="_blank"
-        >
-          <span class="sr-only">GitHub</span>
-          <span class="material-symbols-outlined">code</span>
-        </a>
-        <a
-          class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-          href="mailto:joar.hinayo@gmail.com"
-        >
-          <span class="sr-only">Email</span>
-          <span class="material-symbols-outlined">mail</span>
-        </a>
-      </div>
-      <p class="text-sm text-gray-500 dark:text-text-secondary">
-        © 2026 Jommel Hinayon. Built with Tailwind CSS.
-      </p>
+
+    <footer>
+      <p>© 2026 Jommel Hinayon &nbsp;·&nbsp; Built with <span>♥</span> and too much coffee &nbsp;·&nbsp; Cebu, PH</p>
     </footer>
+
     <script>
-      // Theme Toggle Logic
-      const toggleButton = document.getElementById("theme-toggle");
-      const htmlElement = document.documentElement;
-      const iconElement = toggleButton.querySelector(
-        ".material-symbols-outlined",
-      );
+      // Mobile menu
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileLinks = document.querySelectorAll('.mobile-link');
 
-      toggleButton.addEventListener("click", () => {
-        htmlElement.classList.toggle("dark");
-        if (htmlElement.classList.contains("dark")) {
-          iconElement.textContent = "light_mode";
-        } else {
-          iconElement.textContent = "dark_mode";
-        }
-      });
-
-      // Set initial icon
-      if (htmlElement.classList.contains("dark")) {
-        iconElement.textContent = "light_mode";
-      } else {
-        iconElement.textContent = "dark_mode";
+      if (mobileBtn) {
+        mobileBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('open');
+        });
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
       }
 
-      // Mobile Menu Logic
-      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const mobileLinks = document.querySelectorAll(".mobile-link");
+      // Show mobile btn on small screens
+      function checkMobile() {
+        if (window.innerWidth < 768) {
+          mobileBtn.style.display = 'block';
+        } else {
+          mobileBtn.style.display = 'none';
+          mobileMenu.classList.remove('open');
+        }
+      }
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
 
-      if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener("click", () => {
-          mobileMenu.classList.toggle("translate-x-full");
-          const icon = mobileMenuBtn.querySelector("span");
-          if (mobileMenu.classList.contains("translate-x-full")) {
-            icon.textContent = "menu";
-          } else {
-            icon.textContent = "close";
+      // Scroll reveal
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
           }
         });
+      }, { threshold: 0.1 });
 
-        mobileLinks.forEach((link) => {
-          link.addEventListener("click", () => {
-            mobileMenu.classList.add("translate-x-full");
-            mobileMenuBtn.querySelector("span").textContent = "menu";
-          });
-        });
-      }
+      reveals.forEach(el => observer.observe(el));
     </script>
   </body>
 </html>
